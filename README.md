@@ -3,8 +3,8 @@
 A basic example of a single-server js-tale client, combined with discord.js
 
 See the root libraries for more information about them:
-https://github.com/alta-vr/js-tale
-https://github.com/discordjs/discord.js/
+- https://github.com/alta-vr/js-tale
+- https://github.com/discordjs/discord.js/
 
 Currently supports some example commands:
 - ping : responds pong
