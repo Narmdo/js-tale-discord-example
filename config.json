@@ -1,0 +1,8 @@
+{
+    "client_id": "client_1d7b748c-e704-4809-8bb6-efb0f5644ead",
+    "client_secret": "saGhInt/48jZFxvFrR6duaaGWNtZ45xJmhax3G47b3JcUuxv95j8IRNB25fD6DieCJ8OtJo1vCkJeItCHyQzxg==",
+    "scope" : "ws.group ws.group_members ws.group_servers ws.group_bans ws.group_invites group.info group.join group.leave group.view group.members group.invite server.view server.console",
+    "discord" : "NjI0NTMzNjQ4MDAzMTcwMzE0.XYSYSA.ZWICy8g7Lk9A3OamMMQwkEIgOQ8",
+    "groupId" : 1246056446,
+    "xendpoint" : "http://localhost:13490/api/"
+}
