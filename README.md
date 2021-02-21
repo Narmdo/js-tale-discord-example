@@ -10,3 +10,9 @@ Currently supports some example commands:
 - ping : responds pong
 - players : responds with a list of players
 - where <player> : responds with the chunk the player is in 
+
+# Installing:
+- Clone the repo: `git clone https://github.com/Narmdo/js-tale-discord-example`
+- Install dependencies: `npm i`
+- Edit config.json. This should include an ATT client_id, client_password and group ID, and a discord bot token.
+- Run! `npm start` 
