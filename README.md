@@ -16,3 +16,6 @@ Currently supports some example commands:
 - Install dependencies: `npm i`
 - Edit config.json. This should include an ATT client_id, client_password and group ID, and a discord bot token.
 - Run! `npm start` 
+
+# Important!
+If you plan to maintain a repository for your bot, ensure you add `config.json` to the `.gitignore` file.
