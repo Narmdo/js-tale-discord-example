@@ -1,12 +1,12 @@
 const config = require('./config');
 
-import { AttSimple } from 'js-tale/dist/Helpers';
-
 import att from 'js-tale/dist';
-import discord, { Message } from 'discord.js';
+import discord from 'discord.js';
 
 var discordBot:discord.Client;
-var attBot:AttSimple;
+var attBot:att.Client;
+
+var connection:undefined|att.ServerConnection;
 
 init();
 
@@ -19,7 +19,12 @@ async function init()
     
     await new Promise<void>(resolve => discordBot.once('ready', () => resolve()));
 
-    attBot = new AttSimple(config, serverConnected);    
+    attBot = new att.Client();
+    await attBot.init(config);
+    
+    var group = await attBot.groupManager.groups.get(config.groupId);
+
+    group.automaticConsole(serverConnected);
 };
 
 function handleDiscordMessage(message:discord.Message)
@@ -52,44 +57,56 @@ function handleDiscordMessage(message:discord.Message)
     }
 }
 
-var discordHandler : {[command:string]:(message:Message, args?:string)=>void} = 
+var discordHandler : {[command:string]:(message:discord.Message, args?:string)=>void} = 
 {
     'ping' : message => message.reply('pong'),
 
     'players' : async (message) =>
     {
-        if (!attBot.connection)
+        if (!connection)
         {
             message.reply("Server is not online");
             return;
         }
 
-        var response = await attBot.connection.send(`player list`);
+        var response = await connection.send(`player list`);
 
         message.reply(response.Result.map((item:any) => item.username).join('\n'));
     },
 
     'where' : async (message, player) => 
     {
-        if (!attBot.connection)
+        if (!connection)
         {
             message.reply("Server is not online");
             return;
         }
 
-        var response = await attBot.connection.send(`player detailed ${player}`);
+        var response = await connection.send(`player detailed ${player}`);
 
         message.reply(`${player} is at ${response.Result.Chunk}`);
     }
 }
 
 
-function serverConnected(connection:att.ServerConnection)
+function serverConnected(newConnection:att.ServerConnection)
 {
-    connection.subscribe('PlayerJoined', playerJoined);
+    console.log(`Connected to ${newConnection.server.info.name}`);
+
+    connection = newConnection;
+
+    newConnection.on('closed', () => 
+    { 
+        console.log(`Connection to ${newConnection.server.info.name} closed`);
+
+        if (connection == newConnection)
+        {
+            connection = undefined;
+        }
+    });
 }
 
 function playerJoined(player:any)
 {
-    
+    console.log(`${player.name} joined the server.`);
 }
