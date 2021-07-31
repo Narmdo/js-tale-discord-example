@@ -1,5 +1,5 @@
 # Note, before cloning:
-I recommend using this project as an example, reading through index.ts, rather than cloning.
+I recommend using this project as an example, reading through index.ts, rather than cloning as a basis for your bot.
 This is for two reasons:
 - js-tale has been updated several times since this was made
 - When getting assistance from others, it is helpeful for people to all be on the same starting page
